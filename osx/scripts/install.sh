@@ -28,3 +28,8 @@ brew services start yabai
 echo "Installing skhd"
 brew install koekeishiya/formulae/skhd
 brew services start skhd
+
+
+# install minicom (serial comunication tool)
+echo "Installing Minicom"
+brew install minicom

@@ -30,6 +30,7 @@ alias km="kinit && mwinit -k id_ecdsa.pub"
 alias python="python3"
 alias isengard="isengardcli"
 alias bb="brazil-build"
-
+# open minicom pointing to Raspberry Pi Pico shell
+alias picosh="minicom -b 115200 -o -D /dev/tty.usbmodem2141301"
 
 PATH="~/.nvm/versions/node/v16.19.1/bin:$PATH"
