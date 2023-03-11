@@ -30,6 +30,7 @@ alias km="kinit && mwinit -k id_ecdsa.pub"
 alias python="python3"
 alias isengard="isengardcli"
 alias bb="brazil-build"
+alias sshpop="ssh marcos@sshpopos.mmmb.dev"
 # open minicom pointing to Raspberry Pi Pico shell
 alias picosh="minicom -b 115200 -o -D /dev/tty.usbmodem2141301"
 
