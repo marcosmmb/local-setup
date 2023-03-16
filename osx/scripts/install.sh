@@ -33,3 +33,8 @@ brew services start skhd
 # install minicom (serial comunication tool)
 echo "Installing Minicom"
 brew install minicom
+
+
+# install 1password cli
+echo "Installing 1Password CLI"
+brew install --cask 1password/tap/1password-cli
