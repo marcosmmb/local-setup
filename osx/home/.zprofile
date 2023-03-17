@@ -27,6 +27,7 @@ prompt='%2/ $(git_branch_name) > '
 alias sshcd="ssh dev-dsk-marcosmx-2a-499004ab.us-west-2.amazon.com"
 alias c="clear"
 alias km="kinit && mwinit -k id_ecdsa.pub"
+alias mw="mwinit --aea -o"
 alias python="python3"
 alias isengard="isengardcli"
 alias bb="brazil-build"
