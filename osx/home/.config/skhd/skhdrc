@@ -51,3 +51,7 @@ alt - n : yabai -m window --space next; yabai -m space --focus next
 
 # toggle window zoom
 alt - f : yabai -m window --toggle zoom-fullscreen
+
+# disable hide window command
+cmd - h : :
+
