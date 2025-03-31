@@ -6,7 +6,7 @@ echo "Copying .zshrc"
 cp ./osx/home/.zshrc ~/.zshrc
 
 echo "Copying skhd"
-cp -r ./osx/home/.config/ ~/.config/skhd
+cp -r ./osx/home/.config/ ~/.skhdrc
 
 echo "Copying yabai"
-cp -r ./osx/home/.config/ ~/.config/yabai
+cp -r ./osx/home/.config/ ~/.yabairc

@@ -43,3 +43,8 @@ brew install --cask 1password/tap/1password-cli
 # install btop
 echo "Installing btop"
 brew reinstall btop
+
+# install github cli
+echo "Installing Github CLI
+brew install gh
+
