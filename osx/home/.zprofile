@@ -2,7 +2,7 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Show Isengard profile
-eval "$(isengardcli shell-profile)"
+# eval "$(isengardcli shell-profile)"
 
 # Show git branch
 # Find and set branch name var if in git repository.
