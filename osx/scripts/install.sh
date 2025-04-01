@@ -13,8 +13,9 @@ docker --version
 echo "Installing Stats"
 brew install --cask stats
 
-# download DisplayLink
-# https://www.synaptics.com/products/displaylink-graphics/downloads/macos
+# install displaylink manager
+echo "Installing DisplayLink Manager"
+brew install --cask displaylink
 
 # install yabai
 # https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
@@ -38,7 +39,7 @@ brew install --cask 1password/tap/1password-cli
 
 # install btop
 echo "Installing btop"
-brew reinstall btop
+brew install btop
 
 # install github cli
 echo "Installing Github CLI"
