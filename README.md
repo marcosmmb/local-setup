@@ -8,12 +8,21 @@ Files should be located starting from the home directory. For instance, on MacOS
 ### Install applications
 From root folder, run
 ```bash
-$ ./osx/scripts/install.sh
+make install
 ```
 
 
-### Replicate files automatically
+### Replicate files from local to repository
 From root folder, run
+
 ```bash
-$ ./osx/scripts/replicate.sh
+make fromlocal
+```
+
+
+### Apply files from repository to local
+From root folder, run
+
+```bash
+make tolocal
 ```
