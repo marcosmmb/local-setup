@@ -56,3 +56,7 @@ brew install --cask visual-studio-code
 # install brave browser
 echo "Installing Brave"
 brew install --cask brave-browser
+
+# install bitwarden
+echo "Installing Bitwarden"
+brew install --cask bitwarden
