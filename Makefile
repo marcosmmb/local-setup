@@ -1,11 +1,11 @@
-install:
-	make tools
+install-debian:
+	./debian/install.sh
 
-tools:
-	./osx/scripts/install.sh
+install-osx:
+	./osx/install.sh
 
 tolocal:
-	./osx/scripts/apply_to_local.sh
+	./osx/apply_to_local.sh
 
 fromlocal:
-	./osx/scripts/replicate_from_local.sh
+	./osx/replicate_from_local.sh
