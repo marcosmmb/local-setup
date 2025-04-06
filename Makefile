@@ -1,5 +1,5 @@
 install-debian:
-	./debian/install.sh
+	cat ./debian/install.sh | sh
 
 install-osx:
 	./osx/install.sh
