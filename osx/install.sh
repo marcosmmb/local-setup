@@ -60,3 +60,7 @@ brew install --cask brave-browser
 # install bitwarden
 echo "Installing Bitwarden"
 brew install --cask bitwarden
+
+# install moonlight
+echo "Installing Moonlight"
+brew install --cask moonlight
