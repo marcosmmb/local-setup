@@ -4,8 +4,8 @@ main() {
 	echo "Installing tools for Debian"
 
 	echo "Updating and upgrading system"
-	sudo apt update
-	sudo apt upgrade
+	sudo apt update -y
+	sudo apt upgrade -y
 
 	echo "Installing Snap"
 	sudo apt install snapd -y
