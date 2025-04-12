@@ -30,6 +30,9 @@ main() {
 
 	echo "Installing btop"
 	sudo apt install btop
+
+	echo "Installing Arduino IDE"
+	sudo snap install arduino
 }
 
 install_vscode() {
