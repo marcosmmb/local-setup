@@ -64,3 +64,7 @@ brew install --cask bitwarden
 # install moonlight
 echo "Installing Moonlight"
 brew install --cask moonlight
+
+# install arduino ide
+echo "Installing Arduino IDE"
+brew install --cask arduino-ide
