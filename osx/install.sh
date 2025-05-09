@@ -65,6 +65,6 @@ brew install --cask bitwarden
 echo "Installing Moonlight"
 brew install --cask moonlight
 
-# install arduino ide
-echo "Installing Arduino IDE"
-brew install --cask arduino-ide
+# install raycast
+echo "Installing Raycast"
+brew install raycast
