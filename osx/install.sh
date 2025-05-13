@@ -68,3 +68,15 @@ brew install --cask moonlight
 # install raycast
 echo "Installing Raycast"
 brew install raycast
+
+# install youtube downloader
+echo "Installing Youtube Downloader"
+brew install ⁠yt-dlp
+
+# install ffmpeg
+echo "Installing ffmpeg"
+brew install ffmpeg
+
+# install nmap
+echo "Installing nmap"
+brew install nmap
