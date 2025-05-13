@@ -80,3 +80,7 @@ brew install ffmpeg
 # install nmap
 echo "Installing nmap"
 brew install nmap
+
+# install ipython
+echo "Installing iPython"
+brew install ipython
