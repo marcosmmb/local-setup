@@ -84,3 +84,7 @@ brew install nmap
 # install ipython
 echo "Installing iPython"
 brew install ipython
+
+# install pipx
+echo "Installing pipx"
+brew install pipx
