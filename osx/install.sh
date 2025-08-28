@@ -88,3 +88,7 @@ brew install ipython
 # install pipx
 echo "Installing pipx"
 brew install pipx
+
+# install aws-cli
+echo "Installing aws-cli"
+brew install awscli
