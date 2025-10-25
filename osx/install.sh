@@ -92,3 +92,8 @@ brew install pipx
 # install aws-cli
 echo "Installing aws-cli"
 brew install awscli
+
+# install obsidian
+echo "Installing obsidian"
+brew install --cask obsidian
+
