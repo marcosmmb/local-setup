@@ -97,3 +97,6 @@ brew install awscli
 echo "Installing obsidian"
 brew install --cask obsidian
 
+# install Spotify
+echo "Installing Spotify"
+brew install --cask spotify
