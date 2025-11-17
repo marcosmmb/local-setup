@@ -29,14 +29,6 @@ echo "Installing skhd"
 brew install koekeishiya/formulae/skhd
 skhd --start-service
 
-# install minicom (serial comunication tool)
-echo "Installing Minicom"
-brew install minicom
-
-# install 1password cli
-echo "Installing 1Password CLI"
-brew install --cask 1password/tap/1password-cli
-
 # install btop
 echo "Installing btop"
 brew install btop
@@ -68,10 +60,6 @@ brew install --cask moonlight
 # install raycast
 echo "Installing Raycast"
 brew install raycast
-
-# install youtube downloader
-echo "Installing Youtube Downloader"
-brew install ⁠yt-dlp
 
 # install ffmpeg
 echo "Installing ffmpeg"
