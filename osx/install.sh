@@ -92,3 +92,7 @@ brew install --cask obsidian
 # install Spotify
 echo "Installing Spotify"
 brew install --cask spotify
+
+# install gnupg (gpg tool)
+echo "Installing gnupg"
+brew install gnupg
