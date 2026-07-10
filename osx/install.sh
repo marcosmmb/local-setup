@@ -96,3 +96,7 @@ brew install --cask spotify
 # install gnupg (gpg tool)
 echo "Installing gnupg"
 brew install gnupg
+
+# install modle
+echo "Installing mole"
+brew install mole
