@@ -4,7 +4,11 @@ echo "Installing tools"
 echo "Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# install docker\
+# install git
+echo "Installing git"
+brew install git
+
+# install docker
 echo "Installing Docker"
 brew install --cask docker
 docker --version
