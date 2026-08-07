@@ -104,7 +104,6 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "telemetry.telemetryLevel": "off",
-    "viceroy.config.lastVersion": "0.53.202412",
     "files.watcherExclude": {
         "**/build/**": true,
         "**/.git/objects/**": true,
@@ -113,7 +112,6 @@
         "**/node_modules/*/**": true
     },
     "files.exclude": {
-        ".viceroy": true,
         "apollo-overrides": true,
         "release-info": true,
         "src/*/build": false,
@@ -136,15 +134,11 @@
         "**/bower_components": true,
         "**/*.code-search": true
     },
-    "[brazilPackageConfig]": {
-        "workbench.editor.languageDetection": false
-    },
     "yaml.schemas": {
         "/Users/marcos/.vscode/extensions/continue.continue-1.0.11-darwin-arm64/config-yaml-schema.json": [
             ".continue/**/*.yaml"
         ],
-        "https://www.schemastore.org/yamllint.json": "file:///workplace/marcosmx/LilyMetricsCDRServiceRoleInfrastructure/src/LilyMetricsCDRServiceRoleInfrastructure/configuration/jinja/lily_rtm_canary_agent_event_stream_publisher_role.template.yml",
-        "file:///Users/marcosmx/.vscode/extensions/marklel.vscode-brazil-0.53.202412/assets/languages/rde/schema.json": "**/definition.yaml"
+        "https://www.schemastore.org/yamllint.json": "**/.yamllint"
     },
     "java.configuration.runtimes": [
         {
@@ -153,22 +147,7 @@
             "default": true
         }
     ],
-    "viceroy.marketplace.extensionUpdateChannels": {
-        "marklel.vscode-brazil": "stable",
-        "amzn.AWSGuruQLinter": "stable",
-        "asbx.amzn-cline": "stable",
-        "mchpatr.datapath-vscode": "stable",
-        "amazon.controls-dsl": "stable",
-        "amzn.amzn-pippin": "stable",
-        "mchpatr.datapath-language-server": "stable",
-        "amzn.vscode-isengard-tooltip": "stable",
-        "kaze.vscode-plugin-contribution-model": "stable"
-    },
-    "viceroy.config.internal.autoUpdate": "daily",
-    "viceroy.config.internal.lastUpdateTime": "2025-11-07T22:04:09.056Z",
     "workbench.editor.openSideBySideDirection": "down",
-    "viceroy.workspaceSyncStrategy": "automatic",
-    "viceroy.doc.welcome.showAtStartup": false,
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
     "python.analysis.extraPaths": [
         "${workspaceFolder}/src"
@@ -190,10 +169,7 @@
     "kotlin.languageServer.enabled": false,
     "kotlin.debugAdapter.enabled": false,
     "workbench.editor.empty.hint": "hidden",
-    "viceroy.config.setUpCodeWhisperer": false,
     "update.mode": "none",
-    "viceroy.config.notifyGlibcIssue": false,
-    "viceroy.config.setup.amazonQ": false,
     "extensions.ignoreRecommendations": true,
     "explorer.fileNesting.patterns": {
         "*.ts": "${capture}.js",
@@ -218,10 +194,8 @@
         "amazonQChatPairProgramming": true,
         "amazonQChatDisclaimer": true
     },
-    "viceroy.config.notifyMarch25AL2Support": false,
     "python.languageServer": "Pylance",
     "python.analysis.include": [
-        "/root/.cache/pypoetry/virtualenvs/ainform-mmHr-LpV-py3.12/lib/python3.12/site-packages",
         "/root/.cache/pypoetry/virtualenvs/*/lib/*/site-packages"
     ],
     "editor.defaultFormatter": "ms-python.black-formatter",

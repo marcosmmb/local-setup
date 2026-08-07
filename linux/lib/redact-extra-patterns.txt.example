@@ -1,0 +1,19 @@
+# Extra redaction patterns for redact_jsonc.py -- copy to
+# redact-extra-patterns.txt, which .gitignore excludes from this public repo.
+#
+# One Python regex per line, matched case-insensitively against every string in
+# the settings file, as a value and as a key. A matching value is replaced with
+# the placeholder; a matching key is dropped along with its value.
+#
+# This is where internal project, service and host names go. They cannot live
+# in redact_jsonc.py's own VALUE_PATTERNS, because that file is committed --
+# naming them there would publish the very identifiers the rule exists to hide.
+#
+# Blank lines and # comments are ignored. Bad regexes are reported and skipped.
+
+# Internal project names that show up in interpreter and virtualenv paths:
+# my-internal-project
+# some-service-name
+
+# An internal domain that extensions record as an endpoint:
+# \.corp\.example\.com\b

@@ -48,7 +48,7 @@ bootstrap.sh              Entry point: install + apply, platform-aware
 linux/
   install.sh              apt repos & keyrings, packages, snaps, oh-my-zsh, Go tools
   replicate_from_local.sh Machine -> repo  (allowlist-driven)
-  apply_to_local.sh       Repo -> machine  (backs up before overwriting)
+  apply_to_local.sh       Repo -> machine  (merges in, backing up what it replaces)
   home/                   Dotfiles, laid out relative to $HOME
   manifests/              Package lists, extensions, apt source definitions
   dconf/gnome.ini         GNOME settings, keybindings, extension state
@@ -81,12 +81,24 @@ Private keys, `~/.gnupg`, `~/.kube`, `~/.docker/config.json`, `~/.config/gcloud`
 `~/.claude.json`, `gh`'s `hosts.yml`, Terraform credentials, browser profiles
 and shell history.
 
-Three layers keep them out:
+Four layers keep them out:
 
 1. `replicate_from_local.sh` copies only from an explicit allowlist — it never
-   globs `$HOME`.
-2. `.gitignore` denies secret-shaped paths as a backstop against manual `git add`.
-3. A `gitleaks` pre-commit hook (`make hooks`) blocks commits that slip through.
+   globs `$HOME`. (`/etc/apt/sources.list.d` is the one glob, and any credential
+   embedded in a repository URI is stripped on the way in.)
+2. `lib/redact_jsonc.py` strips secret-shaped keys, secret-shaped *values* and
+   internal identifiers out of VS Code's `settings.json`. Internal project and
+   service names go in `lib/redact-extra-patterns.txt`, which is gitignored —
+   see the `.example` beside it.
+3. `.gitignore` denies secret-shaped paths as a backstop against manual `git add`.
+4. A `gitleaks` pre-commit hook (`make hooks`, config in `.gitleaks.toml`)
+   blocks commits that slip through.
+
+Applying works the other way round: `apply_to_local.sh` merges the repository's
+files into `~/.config` rather than replacing directories wholesale, so the live
+credentials and editor state that were deliberately never captured survive it.
+`settings.json` is merged key by key, and a redaction placeholder never
+overwrites the real value the machine already has.
 
 Hardware-specific drivers (Dell Somerville/Remoraid, DisplayLink, IPU6 camera)
 and IT-managed agents (SentinelOne, osquery) are also skipped — `install.sh`

@@ -55,6 +55,10 @@ REDACTED_CONFIG_FILES=(
 # dconf subtrees to skip: these carry account identities rather than settings.
 DCONF_EXCLUDE='^(org/gnome/nm-applet|org/gnome/evolution-data-server)'
 
+# Individual dconf keys to skip, as <section>/<key>. Shared with
+# apply_to_local.sh so a key is dropped on the way out and on the way back in.
+DCONF_EXCLUDE_KEYS="$(grep -vE '^\s*(#|$)' "$LINUX_DIR/lib/dconf-exclude-keys.txt")"
+
 log() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m[skip]\033[0m %s\n' "$*"; }
 
@@ -119,10 +123,25 @@ copy_config() {
 dump_dconf() {
 	log "Dumping dconf (GNOME settings, keybindings, extension state)"
 	mkdir -p "$DCONF_DIR"
-	# Drop excluded sections and the key/value block that follows each one.
-	dconf dump / | awk -v skip="$DCONF_EXCLUDE" '
-		/^\[/ { inskip = (substr($0, 2, length($0) - 2) ~ skip) }
-		!inskip { print }
+	# Drop excluded sections along with the key/value block that follows each
+	# one, then drop the individually excluded keys.
+	dconf dump / | awk -v skip="$DCONF_EXCLUDE" -v skipkeys="$DCONF_EXCLUDE_KEYS" '
+		BEGIN {
+			n = split(skipkeys, parts, /[[:space:]]+/)
+			for (i = 1; i <= n; i++) if (parts[i] != "") drop[parts[i]] = 1
+		}
+		/^\[/ {
+			section = substr($0, 2, length($0) - 2)
+			inskip = (section ~ skip)
+		}
+		inskip { next }
+		/^\[/ { print; next }
+		{
+			key = $0
+			sub(/=.*/, "", key)
+			if (key != "" && ((section "/" key) in drop)) next
+			print
+		}
 	' > "$DCONF_DIR/gnome.ini"
 	echo "    dconf/gnome.ini ($(grep -c '^\[' "$DCONF_DIR/gnome.ini") sections)"
 }
@@ -176,13 +195,29 @@ copy_apt_sources() {
 	rm -rf "$dest"
 	mkdir -p "$dest"
 	# Skip distro defaults and curtin's installer leftovers; keep third-party repos.
+	#
+	# This directory is the one thing here that is globbed rather than
+	# allowlisted, because the point is to record whatever repositories the
+	# machine actually has. Managed and commercial repositories routinely carry
+	# a per-machine credential in the URI (https://<token>@repo.vendor.com/...)
+	# or in a deb822 auth field, so strip those on the way in rather than
+	# publishing them.
+	local name
 	for f in /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
 		[ -f "$f" ] || continue
-		case "$(basename "$f")" in
+		name="$(basename "$f")"
+		case "$name" in
 			ubuntu.sources|ubuntu.sources.curtin.orig) continue ;;
 		esac
-		cp "$f" "$dest/"
-		echo "    $(basename "$f")"
+		sed -E \
+			-e 's,://[^/[:space:]@]+(:[^/[:space:]@]*)?@,://<redacted>@,g' \
+			-e 's,^([[:space:]]*(Password|Passphrase|Token|Authorization)[[:space:]]*:).*,\1 <redacted>,I' \
+			"$f" > "$dest/$name"
+		if cmp -s "$f" "$dest/$name"; then
+			echo "    $name"
+		else
+			echo "    $name (credentials redacted)"
+		fi
 	done
 }
 

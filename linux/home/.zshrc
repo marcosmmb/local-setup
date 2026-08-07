@@ -107,8 +107,24 @@ export GOPRIVATE='github.com/tigera/*'
 
 ### ALIASES
 
-alias k='KUBECONFIG=./.local/kubeconfig kubectl'
-alias kubectl='KUBECONFIG=./.local/kubeconfig kubectl'
+alias k='kubectl'
+
+# Run kubectl against the cluster kubeconfig a repository drops in .local/.
+#
+# This is deliberately explicit rather than an alias over `kubectl`: KUBECONFIG
+# resolved relative to $PWD means any directory you happen to be standing in
+# gets to supply it, so cd-ing into an untrusted checkout that ships a
+# .local/kubeconfig would silently hand kubectl an attacker's file -- and a
+# kubeconfig can run arbitrary commands through users[].user.exec.
+kubelocal() {
+	local cfg="$PWD/.local/kubeconfig"
+	if [ ! -f "$cfg" ]; then
+		print -u2 "kubelocal: no .local/kubeconfig in $PWD"
+		return 1
+	fi
+	print -u2 "kubelocal: using $cfg"
+	KUBECONFIG="$cfg" kubectl "$@"
+}
 
 # OpenHarness
-export PATH="/home/marcos/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

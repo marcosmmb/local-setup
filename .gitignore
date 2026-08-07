@@ -21,10 +21,10 @@ id_dsa*
 !*.pub
 
 # --- ssh / gpg ---
-.ssh/
-**/.ssh/
+# Ignore the contents rather than the directory: git does not descend into an
+# excluded directory, so `!**/.ssh/config` under `**/.ssh/` could never match.
+**/.ssh/*
 !**/.ssh/config
-.gnupg/
 **/.gnupg/
 *.gpg
 *.asc
@@ -37,18 +37,19 @@ id_dsa*
 *.kubeconfig
 
 # --- cloud provider credentials ---
-.config/gcloud/
+# Patterns with an interior slash are anchored to the repository root, so they
+# must be written with a `**/` prefix to reach the dotfiles under linux/home/.
 **/gcloud/
-.aws/
+**/.aws/
 **/credentials
 **/credentials.*
-.terraform.d/credentials*
+**/.terraform.d/credentials*
 *.tfstate
 *.tfstate.*
 *.tfvars
 
 # --- application tokens ---
-.docker/config.json
+**/.docker/config.json
 **/hosts.yml
 .claude.json
 .claude/
@@ -77,7 +78,14 @@ id_dsa*
 .env.*
 !.env.example
 
+# --- local redaction rules ---
+# Internal project/service names for redact_jsonc.py. Naming them in a public
+# repository would defeat the point; see the committed .example alongside.
+linux/lib/redact-extra-patterns.txt
+
 # --- local noise ---
 .DS_Store
 *.swp
 *.bak
+__pycache__/
+*.pyc

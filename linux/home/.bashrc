@@ -116,16 +116,31 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/marcos/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/marcos/Downloads/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/marcos/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/marcos/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+# Google Cloud SDK, if it was installed from the tarball rather than from apt.
+#
+# ~/Downloads is where the browser writes, so it is not a directory to source
+# shell code out of at every login; move the SDK somewhere deliberate instead.
+GCLOUD_SDK="${GCLOUD_SDK:-$HOME/.local/google-cloud-sdk}"
+if [ -f "$GCLOUD_SDK/path.bash.inc" ]; then . "$GCLOUD_SDK/path.bash.inc"; fi
+if [ -f "$GCLOUD_SDK/completion.bash.inc" ]; then . "$GCLOUD_SDK/completion.bash.inc"; fi
 
 
 # Aliases
 
-alias k='KUBECONFIG=./.local/kubeconfig kubectl'
+alias k='kubectl'
+
+# See the note in .zshrc: a $PWD-relative KUBECONFIG lets any directory you cd
+# into supply the cluster credentials, and kubeconfigs can exec arbitrary
+# binaries, so using the repository-local one is an explicit act.
+kubelocal() {
+	local cfg="$PWD/.local/kubeconfig"
+	if [ ! -f "$cfg" ]; then
+		echo "kubelocal: no .local/kubeconfig in $PWD" >&2
+		return 1
+	fi
+	echo "kubelocal: using $cfg" >&2
+	KUBECONFIG="$cfg" kubectl "$@"
+}
 
 # OpenHarness
-export PATH="/home/marcos/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

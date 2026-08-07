@@ -22,17 +22,64 @@ backup() {
 	cp -r "$target" "$BACKUP_DIR/$rel"
 }
 
-install_path() {
-	local src="$1" dest="$2"
+# Merge the repository's copy of a JSONC settings file into the live one.
+#
+# redact_jsonc.py strips machine-local values out of these before they are
+# committed. Copying the result back verbatim would overwrite the real values
+# with the placeholder string -- and change their JSON type, which breaks the
+# extensions that read them -- so placeholder keys keep whatever the machine
+# already has instead.
+MERGED_FILES=(
+	".config/Code/User/settings.json"
+)
+
+is_merged_file() {
+	local rel="$1" m
+	for m in "${MERGED_FILES[@]}"; do
+		[ "$rel" = "$m" ] && return 0
+	done
+	return 1
+}
+
+install_file() {
+	local src="$1" dest="$2" rel="${2#"$HOME"/}"
 	backup "$dest"
 	mkdir -p "$(dirname "$dest")"
-	if [ -d "$src" ]; then
-		rm -rf "$dest"
-		cp -r "$src" "$dest"
-	else
-		cp "$src" "$dest"
+	if is_merged_file "$rel"; then
+		if python3 "$LINUX_DIR/lib/merge_jsonc.py" "$src" "$dest" > "$dest.new"; then
+			mv "$dest.new" "$dest"
+			echo "    $rel (merged; machine-local values kept)"
+			return 0
+		fi
+		rm -f "$dest.new"
+		warn "$rel: merge failed, left the existing file alone"
+		return 0
 	fi
-	echo "    ${dest#"$HOME"/}"
+	cp "$src" "$dest"
+	echo "    $rel"
+}
+
+# Copy a directory in file by file rather than replacing it wholesale.
+#
+# The repository mirror is deliberately partial -- .config/gh holds only
+# config.yml because hosts.yml is the OAuth token, and .config/Code holds only
+# User/settings.json and User/keybindings.json -- so `rm -rf` on the destination
+# would delete the live credentials and editor state that were never captured.
+install_tree() {
+	local src="$1" dest="$2"
+	find "$src" -type f -print0 \
+		| while IFS= read -r -d '' f; do
+			install_file "$f" "$dest/${f#"$src"/}"
+		done
+}
+
+install_path() {
+	local src="$1" dest="$2"
+	if [ -d "$src" ]; then
+		install_tree "$src" "$dest"
+	else
+		install_file "$src" "$dest"
+	fi
 }
 
 apply_home() {
@@ -54,8 +101,30 @@ apply_home() {
 apply_dconf() {
 	local f="$LINUX_DIR/dconf/gnome.ini"
 	[ -f "$f" ] || { warn "no dconf dump to load"; return 0; }
+	command -v dconf >/dev/null || { warn "dconf not installed; skipping GNOME settings"; return 0; }
 	log "Loading GNOME settings from dconf/gnome.ini"
-	dconf load / < "$f"
+
+	# Filter on the way in as well as on the way out. replicate_from_local.sh
+	# already drops the keys in lib/dconf-exclude-keys.txt, but a dump captured
+	# before that -- or edited by hand -- must not be able to turn off this
+	# machine's screen lock just because it was committed.
+	local skipkeys
+	skipkeys="$(grep -vE '^\s*(#|$)' "$LINUX_DIR/lib/dconf-exclude-keys.txt")"
+	awk -v skipkeys="$skipkeys" '
+		BEGIN {
+			n = split(skipkeys, parts, /[[:space:]]+/)
+			for (i = 1; i <= n; i++) if (parts[i] != "") drop[parts[i]] = 1
+		}
+		/^\[/ { section = substr($0, 2, length($0) - 2); print; next }
+		{
+			key = $0
+			sub(/=.*/, "", key)
+			if (key != "" && ((section "/" key) in drop)) { skipped++; next }
+			print
+		}
+		END { if (skipped) print "    skipped " skipped " screen-lock/suspend key(s)" > "/dev/stderr" }
+	' "$f" | dconf load /
+
 	echo "    loaded $(grep -c '^\[' "$f") sections (log out and back in to apply fully)"
 }
 

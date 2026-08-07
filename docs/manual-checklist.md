@@ -44,7 +44,10 @@ gpg --import private.asc && shred -u private.asc
 ## 3. GitHub CLI
 
 `~/.config/gh/config.yml` is restored by `apply_to_local.sh`; the token in
-`hosts.yml` is not.
+`hosts.yml` is not. Applying does not delete an existing `hosts.yml` either —
+it merges the repository's files into `~/.config` rather than replacing whole
+directories — so on a machine that is already authenticated there is nothing to
+do here.
 
 ```bash
 gh auth login
@@ -72,10 +75,16 @@ gcloud config set project <project>
 - [ ] Re-fetch cluster contexts (`gcloud container clusters get-credentials …`)
 - [ ] Restore any standalone kubeconfigs under `~/kube/`
 
-> Note: `.zshrc` aliases `kubectl` to `KUBECONFIG=./.local/kubeconfig kubectl`,
-> which is a **relative** path — kubectl only works from a directory containing
-> `.local/kubeconfig`. Consider changing this to an absolute path or a function
-> that falls back to `~/.kube/config`.
+> Note: `kubectl` uses `~/.kube/config` as normal. To run against the
+> kubeconfig a repository drops in `.local/`, use the `kubelocal` function from
+> `.zshrc`/`.bashrc`, which prints the path it picked up.
+>
+> These shells used to alias `kubectl` itself to
+> `KUBECONFIG=./.local/kubeconfig kubectl`. A `$PWD`-relative KUBECONFIG lets
+> whatever directory you happen to be in supply the cluster credentials, so
+> `cd`-ing into an untrusted checkout that ships a `.local/kubeconfig` handed
+> kubectl that file — and a kubeconfig can run arbitrary commands through
+> `users[].user.exec`.
 
 ## 6. Docker
 

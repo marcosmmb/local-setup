@@ -1,0 +1,26 @@
+# gitleaks configuration for the pre-commit hook (.githooks/pre-commit).
+#
+# This repository is public and linux/replicate_from_local.sh writes to it
+# unattended, so the hook is the last line of defence. Start from gitleaks'
+# bundled ruleset and add only what this repository specifically needs.
+#
+# Enable the hook with: make hooks
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Values that look secret-shaped but are not"
+
+paths = [
+  # Public signing keys for the apt repositories install.sh configures.
+  '''(^|/)keyrings/.*\.gpg$''',
+  # Captured repository definitions; credentials in URIs are stripped by
+  # replicate_from_local.sh before they land here.
+  '''^linux/manifests/apt-sources/''',
+]
+
+regexes = [
+  # The placeholder redact_jsonc.py leaves behind is not itself a secret.
+  '''<redacted by redact_jsonc\.py -- restore by hand>''',
+]

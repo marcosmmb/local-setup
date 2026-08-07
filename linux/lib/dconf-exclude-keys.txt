@@ -1,0 +1,19 @@
+# dconf keys that are machine security policy rather than personal preference.
+#
+# One key per line, as <section>/<key>. Blank lines and # comments are ignored.
+#
+# These are neither captured by replicate_from_local.sh nor replayed by
+# apply_to_local.sh. The source machine runs with "blank screen: never"
+# (idle-delay=0), which is also what drives GNOME's automatic lock, and with
+# suspend disabled on AC. Replaying that onto every machine provisioned from
+# this repository would leave each of them unlocked when left unattended,
+# whatever policy the machine had before.
+
+org/gnome/desktop/session/idle-delay
+org/gnome/desktop/screensaver/lock-enabled
+org/gnome/desktop/screensaver/lock-delay
+org/gnome/desktop/screensaver/idle-activation-enabled
+org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type
+org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout
+org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type
+org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout
