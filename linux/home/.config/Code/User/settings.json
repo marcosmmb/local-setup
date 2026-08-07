@@ -1,0 +1,327 @@
+{
+    "workbench.colorTheme": "Default High Contrast",
+    "tabnine.experimentalAutoImports": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "editor.renderWhitespace": "all",
+    "editor.accessibilityPageSize": 11,
+    "editor.formatOnPaste": true,
+    "editor.fontFamily": "'Ubuntu Mono', monospace",
+    "editor.fontSize": 18,
+    "terminal.integrated.fontSize": 16,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "editor.renderControlCharacters": true,
+    "debug.showBreakpointsInOverviewRuler": true,
+    "[go]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "cmake.configureOnOpen": true,
+    "workbench.startupEditor": "none",
+    "redhat.telemetry.enabled": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "sourcery.token": "<redacted by redact_jsonc.py -- restore by hand>",
+    "git.autofetch": true,
+    "sonarlint.rules": {
+        "java:S120": {
+            "level": "off"
+        },
+        "typescript:S4624": {
+            "level": "off"
+        },
+        "java:S6242": {
+            "level": "off"
+        }
+    },
+    "terminal.integrated.scrollback": 10000,
+    "githubPullRequests.fileListLayout": "tree",
+    "ponicode.token": "<redacted by redact_jsonc.py -- restore by hand>",
+    "rsp-ui.enableStartServerOnActivation": [
+        {
+            "id": "redhat.vscode-community-server-connector",
+            "name": "Community Server Connector",
+            "startOnActivation": true
+        }
+    ],
+    "yaml.customTags": [
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
+    ],
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "[ruby]": {
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.semanticHighlighting.enabled": true
+    },
+    "byesig.fold": false,
+    "byesig.enabled": true,
+    "byesig.opacity": 0.5,
+    "byesig.showIcon": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.rulers": [
+        120
+    ],
+    "git.ignoreMissingGitWarning": true,
+    "workbench.editor.splitInGroupLayout": "vertical",
+    "editor.minimap.maxColumn": 70,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.telemetryLevel": "off",
+    "viceroy.config.lastVersion": "0.53.202412",
+    "files.watcherExclude": {
+        "**/build/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true,
+        "**/node_modules/*/**": true
+    },
+    "files.exclude": {
+        ".viceroy": true,
+        "apollo-overrides": true,
+        "release-info": true,
+        "src/*/build": false,
+        "build": false,
+        "env": true,
+        "packageInfo*": true,
+        ".bemol": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/CVS": true
+    },
+    "search.exclude": {
+        "env": true,
+        "src/*/build": true,
+        "build": true,
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true
+    },
+    "[brazilPackageConfig]": {
+        "workbench.editor.languageDetection": false
+    },
+    "yaml.schemas": {
+        "/Users/marcos/.vscode/extensions/continue.continue-1.0.11-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "https://www.schemastore.org/yamllint.json": "file:///workplace/marcosmx/LilyMetricsCDRServiceRoleInfrastructure/src/LilyMetricsCDRServiceRoleInfrastructure/configuration/jinja/lily_rtm_canary_agent_event_stream_publisher_role.template.yml",
+        "file:///Users/marcosmx/.vscode/extensions/marklel.vscode-brazil-0.53.202412/assets/languages/rde/schema.json": "**/definition.yaml"
+    },
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-11",
+            "path": "/opt/homebrew/Cellar/openjdk@11/11.0.18/libexec/openjdk.jdk/Contents/Home",
+            "default": true
+        }
+    ],
+    "viceroy.marketplace.extensionUpdateChannels": {
+        "marklel.vscode-brazil": "stable",
+        "amzn.AWSGuruQLinter": "stable",
+        "asbx.amzn-cline": "stable",
+        "mchpatr.datapath-vscode": "stable",
+        "amazon.controls-dsl": "stable",
+        "amzn.amzn-pippin": "stable",
+        "mchpatr.datapath-language-server": "stable",
+        "amzn.vscode-isengard-tooltip": "stable",
+        "kaze.vscode-plugin-contribution-model": "stable"
+    },
+    "viceroy.config.internal.autoUpdate": "daily",
+    "viceroy.config.internal.lastUpdateTime": "2025-11-07T22:04:09.056Z",
+    "workbench.editor.openSideBySideDirection": "down",
+    "viceroy.workspaceSyncStrategy": "automatic",
+    "viceroy.doc.welcome.showAtStartup": false,
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/src"
+    ],
+    "aws.suppressPrompts": {
+        "codeWhispererConnectionExpired": true,
+        "codeWhispererNewWelcomeMessage": true
+    },
+    "workbench.colorCustomizations": {
+        "focusBorder": "#ffc800",
+        "terminal.tab.activeBorder": "#ffc800",
+        "contrastBorder": "#686868",
+        "diffEditor.removedTextBorder": "#da0303",
+        "diffEditor.insertedTextBorder": "#04c904"
+    },
+    "kotlin.languageServer.enabled": false,
+    "kotlin.debugAdapter.enabled": false,
+    "workbench.editor.empty.hint": "hidden",
+    "viceroy.config.setUpCodeWhisperer": false,
+    "update.mode": "none",
+    "viceroy.config.notifyGlibcIssue": false,
+    "viceroy.config.setup.amazonQ": false,
+    "extensions.ignoreRecommendations": true,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.db": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.s3db": "${capture}.${extname}-*"
+    },
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.commandPalette.experimental.enableNaturalLanguageSearch": false,
+    "amazonQ.telemetry": false,
+    "git.openRepositoryInParentFolders": "never",
+    "amazonQ.suppressPrompts": {
+        "codeWhispererConnectionExpired": true,
+        "amazonQChatPairProgramming": true,
+        "amazonQChatDisclaimer": true
+    },
+    "viceroy.config.notifyMarch25AL2Support": false,
+    "python.languageServer": "Pylance",
+    "python.analysis.include": [
+        "/root/.cache/pypoetry/virtualenvs/ainform-mmHr-LpV-py3.12/lib/python3.12/site-packages",
+        "/root/.cache/pypoetry/virtualenvs/*/lib/*/site-packages"
+    ],
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "python.pyrefly.disableTypeErrors": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "inference.endpoint": "<redacted by redact_jsonc.py -- restore by hand>",
+    "inference.custom.model": "gemma3:4b",
+    "inference.model": "custom",
+    "inference.custom.format": "codellama",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "python": false
+    },
+    "editor.accessibilitySupport": "off",
+    "docker.languageserver.diagnostics.instructionJSONInSingleQuotes": "ignore",
+    "pgsql.serverGroups": "<redacted by redact_jsonc.py -- restore by hand>",
+    "pgsql.connections": "<redacted by redact_jsonc.py -- restore by hand>",
+    "database-client.autoSync": true,
+    "[jinja-html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "gitlens.ai.model": "gitkraken",
+    "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+    "git.enableCommitSigning": true,
+    "docker.extension.enableComposeLanguageServer": false,
+    "geminicodeassist.displayInlineContextHint": false,
+    "claudeCode.environmentVariables": [
+        "ANTHROPIC_MODEL",
+        "ANTHROPIC_VERTEX_PROJECT_ID",
+        "CLOUD_ML_REGION",
+        "CLAUDE_CODE_USE_VERTEX"
+    ],
+    "claudeCode.selectedModel": "claude-sonnet-4-5@20250929",
+    "docker.extension.dockerEngineAvailabilityPrompt": false,
+    "explorer.confirmDelete": false,
+    "makefile.configureOnOpen": false,
+    "claudeCode.preferredLocation": "panel",
+    "security.workspace.trust.untrustedFiles": "open",
+    "yaml.maxItemsComputed": 100000,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform"
+    },
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "terminal.integrated.shellIntegration.enabled": false,
+    "python.analysis.typeCheckingMode": "strict",
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "/usr/bin/zsh"
+        },
+        "fish": {
+            "path": "fish"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "diffEditor.ignoreTrimWhitespace": true,
+    "markdown-preview-enhanced.previewTheme": "vscode.css",
+    "editor.selectionClipboard": false,
+    "go.toolsManagement.autoUpdate": true,
+    "markdown-preview-enhanced.enablePreviewZenMode": false
+}

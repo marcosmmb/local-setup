@@ -1,0 +1,83 @@
+# This repository is PUBLIC. Everything below must never be committed.
+#
+# This is the second of three layers protecting it:
+#   1. linux/replicate_from_local.sh copies only from an explicit allowlist
+#   2. this file, as a backstop against manual `git add`
+#   3. the gitleaks pre-commit hook in .githooks/
+#
+# Run `make hooks` once per clone to enable layer 3.
+
+# --- private keys and certificates ---
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+!*.pub
+
+# --- ssh / gpg ---
+.ssh/
+**/.ssh/
+!**/.ssh/config
+.gnupg/
+**/.gnupg/
+*.gpg
+*.asc
+!**/keyrings/*.gpg
+
+# --- kubernetes ---
+.kube/
+**/kubeconfig*
+**/*kubeconfig
+*.kubeconfig
+
+# --- cloud provider credentials ---
+.config/gcloud/
+**/gcloud/
+.aws/
+**/credentials
+**/credentials.*
+.terraform.d/credentials*
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# --- application tokens ---
+.docker/config.json
+**/hosts.yml
+.claude.json
+.claude/
+.codex/
+.copilot/
+.npmrc
+.netrc
+
+# --- browser / app profiles (session cookies, saved logins) ---
+**/BraveSoftware/
+**/chromium/
+**/Slack/
+**/spotify/
+**/Code/User/globalStorage/
+**/Code/User/sync/
+**/Code/User/History/
+
+# --- shell history ---
+.*_history
+*_history
+
+# --- generic secret-shaped names ---
+*secret*
+*.secret
+.env
+.env.*
+!.env.example
+
+# --- local noise ---
+.DS_Store
+*.swp
+*.bak

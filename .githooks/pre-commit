@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# Block commits that contain secrets. This repository is public and
+# linux/replicate_from_local.sh writes to it unattended.
+#
+# Enable with: make hooks
+#
+set -euo pipefail
+
+if ! command -v gitleaks >/dev/null 2>&1; then
+	cat >&2 <<-'EOF'
+	[pre-commit] gitleaks is not installed -- secret scanning is DISABLED.
+
+	  Install it with one of:
+	    go install github.com/gitleaks/gitleaks/v8@latest
+	    sudo snap install gitleaks
+
+	  To commit anyway: git commit --no-verify
+	EOF
+	exit 1
+fi
+
+echo "[pre-commit] scanning staged changes for secrets..."
+if ! gitleaks protect --staged --redact --no-banner; then
+	cat >&2 <<-'EOF'
+
+	[pre-commit] gitleaks found potential secrets in the staged changes.
+
+	  Nothing was committed. Review the findings above, then either remove the
+	  secret or add a targeted allowlist entry to .gitleaks.toml.
+	EOF
+	exit 1
+fi
+
+echo "[pre-commit] clean."

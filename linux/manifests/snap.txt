@@ -1,0 +1,18 @@
+bare
+cheese
+core20
+core22
+core24
+desktop-security-center
+firefox
+firmware-updater
+gnome-46-2404
+google-cloud-cli --classic
+gtk-common-themes
+kubectl --classic
+mesa-2404
+prompting-client
+snapd
+snapd-desktop-integration
+snap-store
+zoom-client

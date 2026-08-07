@@ -1,0 +1,8 @@
+! Turn the right Super key (keycode 206) into right Control
+keycode 206 = Control_R
+clear control
+clear mod4
+add control = Control_L
+add control = Control_R
+add mod4 = Super_L
+

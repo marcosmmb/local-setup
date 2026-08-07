@@ -1,0 +1,138 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+c",
+        "command": "workbench.action.terminal.copySelection",
+        "when": "terminalFocus && terminalHasSelection"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "workbench.action.terminal.paste",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "shift+alt+t",
+        "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "shift+alt+k",
+        "command": "workbench.action.terminal.kill"
+    },
+    {
+        "key": "f2",
+        "command": "workbench.action.terminal.renameInstance",
+        "when": "terminalProcessSupported && terminalTabsFocus && terminalTabsSingularSelection"
+    },
+    {
+        "key": "f2",
+        "command": "-workbench.action.terminal.renameInstance",
+        "when": "terminalProcessSupported && terminalTabsFocus && terminalTabsSingularSelection"
+    },
+    {
+        "key": "shift+alt+r",
+        "command": "workbench.action.terminal.rename"
+    },
+    {
+        "key": "ctrl+pagedown",
+        "command": "-workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "ctrl+'",
+        "command": "workbench.action.focusPanel"
+    },
+    {
+        "key": "shift+alt+pageup",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "shift+alt+pagedown",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view>.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "shift+alt+d",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "ctrl+g ctrl+g",
+        "command": "git-graph.view"
+    },
+    {
+        "key": "ctrl+k ctrl+k",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+i",
+        "command": "-editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+i",
+        "command": "editor.debug.action.showDebugHover",
+        "when": "editorTextFocus && inDebugMode"
+    },
+    {
+        "key": "ctrl+k ctrl+i",
+        "command": "-editor.debug.action.showDebugHover",
+        "when": "editorTextFocus && inDebugMode"
+    },
+    {
+        "key": "ctrl+[Comma]",
+        "command": "-workbench.action.openSettings"
+    },
+    {
+        "key": "ctrl+[Comma]",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+[Period]",
+        "command": "-editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+[Comma]",
+        "command": "problems.action.showQuickFixes",
+        "when": "problemFocus"
+    },
+    {
+        "key": "ctrl+[Period]",
+        "command": "-problems.action.showQuickFixes",
+        "when": "problemFocus"
+    },
+    {
+        "key": "ctrl+f4",
+        "command": "java.debug.runJavaFile"
+    },
+    {
+        "key": "shift+alt+d",
+        "command": "-editor.detectLanguage",
+        "when": "editorTextFocus && !notebookEditable"
+    },
+    {
+        "key": "shift+alt+d",
+        "command": "-notebook.cell.detectLanguage",
+        "when": "notebookCellEditable && notebookEditable"
+    },
+    {
+        "key": "shift+enter",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\u001b\r"
+        },
+        "when": "terminalFocus"
+    }
+]

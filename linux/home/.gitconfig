@@ -1,0 +1,11 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[user]
+	email = marcos@tigera.io
+	name = Marcos Monteiro

@@ -1,0 +1,4 @@
+deb http://dell.archive.canonical.com/ noble somerville
+# deb-src http://dell.archive.canonical.com/ noble somerville
+deb http://dell.archive.canonical.com/ noble somerville-remoraid
+# deb-src http://dell.archive.canonical.com/ noble somerville-remoraid

@@ -1,0 +1,57 @@
+# Curated list of apt packages installed by linux/install.sh.
+#
+# This is hand-maintained. apt-manual.txt next to it is the full auto-captured
+# record of the source machine (including base-system and OEM packages) and is
+# kept for reference, not replayed.
+
+# --- shell & core CLI ---
+zsh
+git
+gh
+curl
+wget
+jq
+btop
+fastfetch
+net-tools
+tree
+unzip
+x11-xserver-utils
+
+# --- languages & runtimes ---
+golang-go
+nodejs
+python3-pip
+python3-venv
+
+# --- containers ---
+docker-ce
+docker-ce-cli
+containerd.io
+docker-buildx-plugin
+docker-compose-plugin
+
+# --- kubernetes ---
+kubectl
+kubectx
+
+# --- cloud & infra ---
+google-cloud-cli
+google-cloud-cli-gke-gcloud-auth-plugin
+terraform
+mongodb-database-tools
+
+# --- desktop apps ---
+brave-browser
+code
+slack-desktop
+spotify-client
+
+# --- desktop tooling ---
+gnome-tweaks
+input-remapper
+
+# --- disk & boot (needed if you re-partition with LUKS/LVM) ---
+cryptsetup
+lvm2
+efibootmgr

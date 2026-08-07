@@ -1,0 +1,10 @@
+anthropic.claude-code
+golang.go
+mhutchie.git-graph
+ms-vscode.makefile-tools
+openai.chatgpt
+planetsensorllc.stl-viewer
+qwtel.sqlite-viewer
+rangav.vscode-thunder-client
+shd101wyy.markdown-preview-enhanced
+slevesque.vscode-3dviewer

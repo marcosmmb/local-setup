@@ -1,52 +1,29 @@
 #!/bin/sh
+#
+# Compatibility shim.
+#
+# The Debian/Ubuntu setup now lives in linux/, which handles third-party apt
+# repositories, snaps, dotfiles and GNOME settings rather than a flat list of
+# `apt install` calls. This file stays so the hosted one-liner in the README
+# keeps working:
+#
+#   curl -fsS https://marcosmmb.github.io/local-setup/debian/install.sh | sh
+#
+set -eu
 
-main() {
-	echo "Installing tools for Debian"
+REPO_URL="https://github.com/marcosmmb/local-setup.git"
+CLONE_DIR="${LOCAL_SETUP_DIR:-$HOME/local-setup}"
 
-	echo "Updating and upgrading system"
-	sudo apt update -y
-	sudo apt upgrade -y
+echo "The Debian installer now lives in linux/ and needs the full repository."
 
-	echo "Installing Snap"
-	sudo apt install snapd -y
+if [ ! -d "$CLONE_DIR/.git" ]; then
+	echo "Cloning $REPO_URL into $CLONE_DIR"
+	command -v git >/dev/null 2>&1 || sudo apt-get install -y git
+	git clone "$REPO_URL" "$CLONE_DIR"
+else
+	echo "Using existing clone at $CLONE_DIR"
+	git -C "$CLONE_DIR" pull --ff-only
+fi
 
-	echo "Installing curl"
-	sudo apt install curl -y
-
-	echo "Installing Github CLI"
-	sudo apt install gh -y
-
-	echo "Installing Brave Browser"
-	sudo apt install brave-browser -y
-
-	echo "Installing Docker"
-	sudo apt install docker.io -y
-
-	echo "Installing VSCode"
-	install_vscode
-
-	echo "Installing Moonlight"
-	sudo snap install moonlight
-
-	echo "Installing btop"
-	sudo apt install btop
-
-	echo "Installing Arduino IDE"
-	sudo snap install arduino
-}
-
-install_vscode() {
-
-	sudo apt install wget gpg -y
-	wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-	sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-	echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
-	rm -f packages.microsoft.gpg
-
-	sudo apt install apt-transport-https -y
-	sudo apt update
-	sudo apt install code -y # or code-insiders
-}
-
-
-main
+echo "Running $CLONE_DIR/bootstrap.sh"
+exec "$CLONE_DIR/bootstrap.sh"
