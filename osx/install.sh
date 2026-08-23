@@ -104,3 +104,7 @@ brew install gnupg
 # install modle
 echo "Installing mole"
 brew install mole
+
+# install vorssaint
+echo "Installing Vorssaint"
+brew install --cask vorssaint
