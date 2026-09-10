@@ -22,8 +22,16 @@ and back in.
 
 The hosted one-liner still works and now clones the repository first:
 
+On Debian:
+
 ```bash
 curl -fsS https://marcosmmb.github.io/local-setup/debian/install.sh | sh
+```
+
+On MacOS:
+
+```bash
+curl -fsS https://marcosmmb.github.io/local-setup/osx/install.sh | sh
 ```
 
 ## Everyday use
