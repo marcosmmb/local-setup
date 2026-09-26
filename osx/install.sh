@@ -1,110 +1,91 @@
+#!/bin/sh
+set -eu
+
+echo "Authenticating for installation"
+sudo -v
+
+# Keep the initial authentication valid during long downloads and installations.
+installer_pid=$$
+(
+	while kill -0 "$installer_pid" 2>/dev/null; do
+		sudo -n -v || exit 1
+		sleep 60
+	done
+) >/dev/null 2>&1 &
+sudo_keepalive_pid=$!
+
+cleanup() {
+	kill "$sudo_keepalive_pid" 2>/dev/null || true
+	wait "$sudo_keepalive_pid" 2>/dev/null || true
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+# Skip Homebrew confirmations, including any configured default ask mode.
+unset INTERACTIVE
+export NONINTERACTIVE=1
+export HOMEBREW_NO_ASK=1
+# Homebrew uses sudo -A when this is set. Fail instead of prompting again if
+# cached credentials become unavailable; never store the password in the script.
+export SUDO_ASKPASS=/usr/bin/false
+
 echo "Installing tools"
 
-# install homebrew
-echo "Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Locate an existing installation even if brew is not yet in this shell's PATH.
+if ! command -v brew >/dev/null 2>&1; then
+	if [ -x /opt/homebrew/bin/brew ]; then
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+	elif [ -x /usr/local/bin/brew ]; then
+		eval "$(/usr/local/bin/brew shellenv)"
+	else
+		echo "Installing Homebrew"
+		homebrew_installer=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+		/bin/bash -c "$homebrew_installer" </dev/null
+		if [ -x /opt/homebrew/bin/brew ]; then
+			eval "$(/opt/homebrew/bin/brew shellenv)"
+		else
+			eval "$(/usr/local/bin/brew shellenv)"
+		fi
+	fi
+fi
 
-# install git
-echo "Installing git"
-brew install git
+install_programs() {
+	package_type=$1
+	shift
+	printf 'Installing %s\n' "$@"
+	brew install "$package_type" "$@" </dev/null
+}
 
-# install docker
-echo "Installing Docker"
-brew install --cask docker
-docker --version
+install_programs --formula \
+	git \
+	koekeishiya/formulae/yabai \
+	koekeishiya/formulae/skhd \
+	btop \
+	gh \
+	ffmpeg \
+	nmap \
+	ipython \
+	pipx \
+	uv \
+	awscli \
+	gnupg \
+	mole
 
-# install stats
-echo "Installing Stats"
-brew install --cask stats
+install_programs --cask \
+	docker \
+	stats \
+	displaylink \
+	tabby \
+	visual-studio-code \
+	brave-browser \
+	bitwarden \
+	moonlight \
+	raycast \
+	obsidian \
+	spotify \
+	vorssaint
 
-# install displaylink manager
-echo "Installing DisplayLink Manager"
-brew install --cask displaylink
-
-# install yabai
-# https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
-echo "Installing yabai"
-brew install koekeishiya/formulae/yabai
-yabai --start-service
-
-# install skhd
-# https://github.com/koekeishiya/skhd
-echo "Installing skhd"
-brew install koekeishiya/formulae/skhd
-skhd --start-service
-
-# install btop
-echo "Installing btop"
-brew install btop
-
-# install github cli
-echo "Installing Github CLI"
-brew install gh
-
-# install tabby
-echo "Installing Tabby"
-brew install --cask tabby
-
-# install vs code
-echo "Installing VS Code"
-brew install --cask visual-studio-code
-
-# install brave browser
-echo "Installing Brave"
-brew install --cask brave-browser
-
-# install bitwarden
-echo "Installing Bitwarden"
-brew install --cask bitwarden
-
-# install moonlight
-echo "Installing Moonlight"
-brew install --cask moonlight
-
-# install raycast
-echo "Installing Raycast"
-brew install raycast
-
-# install ffmpeg
-echo "Installing ffmpeg"
-brew install ffmpeg
-
-# install nmap
-echo "Installing nmap"
-brew install nmap
-
-# install ipython
-echo "Installing iPython"
-brew install ipython
-
-# install pipx
-echo "Installing pipx"
-brew install pipx
-
-# install uv
-echo "Installing uv"
-brew install uv
-
-# install aws-cli
-echo "Installing aws-cli"
-brew install awscli
-
-# install obsidian
-echo "Installing obsidian"
-brew install --cask obsidian
-
-# install Spotify
-echo "Installing Spotify"
-brew install --cask spotify
-
-# install gnupg (gpg tool)
-echo "Installing gnupg"
-brew install gnupg
-
-# install modle
-echo "Installing mole"
-brew install mole
-
-# install vorssaint
-echo "Installing Vorssaint"
-brew install --cask vorssaint
+docker --version </dev/null
+yabai --start-service </dev/null
+skhd --start-service </dev/null
